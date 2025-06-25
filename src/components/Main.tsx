@@ -53,10 +53,33 @@ export default function Main() {
   let colemanliaudif: string = "";
   let ari: number = 0;
   let aridif: string = "";
-  const [stats, setStats] = React.useState<{ name: string; value: number }[]>([]);//Tableau des statistiques du texte
-  const [indices, setIndices] = React.useState<{ name: string; score: number; difficulty: string }[]>([]);//Tableau des indices de lisibilité
 
-  
+
+  // États pour les statistiques et les indices de lisibilité
+  // Utilisation de useState pour gérer les tableaux de statistiques et d'indices
+  const [stats, setStats] = React.useState<{ name: string; value: number }[]>([
+    { name: 'Caractères', value: 0 },
+    { name: 'Voyelles', value: 0 },
+    { name: 'Digrammes', value: 0 },
+    { name: 'Trigrammes', value: 0 },
+    { name: 'Syllabes', value: 0 },
+    { name: 'Mots', value: 0 },
+    { name: 'Mots longs', value: 0 },
+    { name: 'Mots polysyllabiques', value: 0 },
+    { name: 'Phrases', value: 0 },
+  ]);
+
+  const [indices, setIndices] = React.useState<{ name: string; score: number; difficulty: string }[]>([
+    { name: 'LIX', score: 0, difficulty: '' },
+    { name: 'RIX', score: 0, difficulty: '' },
+    { name: 'FKGL', score: 0, difficulty: '' },
+    { name: 'Gunning Fog', score: 0, difficulty: '' },
+    { name: 'SMOG', score: 0, difficulty: '' },
+    { name: 'Coleman-Liau', score: 0, difficulty: '' },
+    { name: 'ARI', score: 0, difficulty: '' },
+  ]);
+
+
   /**
    * Colle le texte depuis le presse-papiers dans la zone de texte.
    * Cette fonction est appelée lorsque l'utilisateur clique sur le bouton "Coller".
@@ -90,6 +113,26 @@ export default function Main() {
   function eraseTextarea() {
     if (textareaRef.current) {
       textareaRef.current.value = "";
+      setStats([
+        { name: 'Caractères', value: 0 },
+        { name: 'Voyelles', value: 0 },
+        { name: 'Digrammes', value: 0 },
+        { name: 'Trigrammes', value: 0 },
+        { name: 'Syllabes', value: 0 },
+        { name: 'Mots', value: 0 },
+        { name: 'Mots longs', value: 0 },
+        { name: 'Mots polysyllabiques', value: 0 },
+        { name: 'Phrases', value: 0 },
+      ]);
+      setIndices([
+        { name: 'LIX', score: 0, difficulty: '' },
+        { name: 'RIX', score: 0, difficulty: '' },
+        { name: 'FKGL', score: 0, difficulty: '' },
+        { name: 'Gunning Fog', score: 0, difficulty: '' },
+        { name: 'SMOG', score: 0, difficulty: '' },
+        { name: 'Coleman-Liau', score: 0, difficulty: '' },
+        { name: 'ARI', score: 0, difficulty: '' },
+      ]);
     }
   }
 
@@ -191,6 +234,13 @@ export default function Main() {
     }
   }
 
+  
+  /**
+   * Renvoie la couleur associée à la difficulté d'un indice de lisibilité.
+   * Utilisé pour styliser les cellules du tableau des indices de lisibilité.
+   * @param difficulty 
+   * @returns 
+   */
   function getDifficultyColor(difficulty: string) {
     switch (difficulty) {
       case 'Très difficile':
@@ -213,6 +263,7 @@ export default function Main() {
 
       <div className="border-gray-200 p-4">
 
+        {/* Input utilisateur */}
         <div>
           <div className="flex pb-5 pt-9 gap-1 justify-end">
             <button
@@ -312,8 +363,6 @@ export default function Main() {
           </div>
         </div>
       </div>
-
-
     </>
   );
 }

@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <>
       <header className="flex fixed top-0 left-0 w-full z-50 bg-white p-2 shadow">
-        <div className="text-3xl">LisiCalc</div>
+        <div className="text-3xl text-blue-600 hover:text-blue-500">LisiCalc</div>
         <div className="flex-1" />
         <button
           className="bg-blue-600 border-neutral-300 hover:bg-blue-500 text-white rounded-full w-7 h-7 flex items-center justify-center mb-2 shadow-md border-2 transition-colors cursor-pointer aspect-square p-0"
